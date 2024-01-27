@@ -18,6 +18,7 @@ function RegisterProvider({ children }: Props) {
   const [uomMail, setUomMail] = useState("");
   const [batch, setBatch] = useState("");
   const [faculty, setFaculty] = useState("");
+  const [previousExperience, setPreviousExperience] = useState("");
   const [department, setDepartment] = useState("");
   const [checked, setChecked] = useState(true);
   const [showModal, setShowModal] = useState(false);
@@ -46,6 +47,7 @@ function RegisterProvider({ children }: Props) {
     const faculty: any = localStorage.getItem("faculty");
     const department: any = localStorage.getItem("department");
     const checked: any = localStorage.getItem("checked");
+    const previosEx: any = localStorage.getItem("previousEx");
 
     setName(name);
     setIndex(index);
@@ -56,6 +58,7 @@ function RegisterProvider({ children }: Props) {
     setFaculty(faculty);
     setDepartment(department);
     setChecked(checked);
+    setPreviousExperience(previosEx);
   }, []);
 
   function handleName(e: React.ChangeEvent<HTMLInputElement>) {
@@ -84,6 +87,10 @@ function RegisterProvider({ children }: Props) {
     setBatch(e.target.value);
     localStorage.setItem("batch", e.target.value);
   }
+  function handlePreviousExperions(e: React.ChangeEvent<HTMLInputElement>) {
+    setPreviousExperience(e.target.value);
+    localStorage.setItem("previousEx", e.target.value);
+  }
   function handleFaculty(e: React.ChangeEvent<HTMLInputElement>) {
     setFaculty(e.target.value);
     localStorage.setItem("faculty", e.target.value);
@@ -96,6 +103,7 @@ function RegisterProvider({ children }: Props) {
     setChecked(e.target.checked);
     localStorage.setItem("checked", e.target.value);
   }
+
   function clearForm() {
     setName("");
     setIndex("");
@@ -106,6 +114,7 @@ function RegisterProvider({ children }: Props) {
     setFaculty("");
     setDepartment("");
     setChecked(false);
+    setPreviousExperience("");
   }
   function clearPIN() {
     setFirstInput("");
@@ -139,6 +148,8 @@ function RegisterProvider({ children }: Props) {
         setOtp,
         otp,
         sendOTP,
+        previousExperience,
+        handlePreviousExperions,
         clearPIN,
         enterPinButton,
         setEnterPinButton,

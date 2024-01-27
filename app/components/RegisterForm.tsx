@@ -1,5 +1,5 @@
 "use client";
-
+import { useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
@@ -9,17 +9,94 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import { ToastContainer } from "react-toastify";
 import { setDoc, doc, getDocs, collection } from "firebase/firestore";
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  sendSignInLinkToEmail,
+  sendEmailVerification,
+} from "firebase/auth";
 
 import "react-toastify/dist/ReactToastify.css";
-import { Box, Button, Grid, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Grid,
+  Typography,
+  styled,
+  withStyles,
+} from "@mui/material";
 import { useRegister } from "./RegisterContext";
 import { registration, successMessage, warningMessage } from "./helper";
-import { db } from "@/services/firebase";
+import { auth, db } from "@/services/firebase";
 import { useState } from "react";
 import Modal from "./Modal";
 import Modals from "./Modal";
+import { gsap } from "gsap";
+import { set, getDatabase, onValue, ref } from "firebase/database";
+import { useRouter } from "next/navigation";
 
 const RegisterForm = () => {
+  const starCountRef = ref(db, "user/");
+  const router = useRouter();
+  useEffect(() => {
+    gsap.fromTo(
+      "#name",
+      { opacity: 0 },
+      { opacity: 1, duration: 1, delay: 1.7, y: -10, ease: "back" }
+    );
+    gsap.fromTo(
+      "#index",
+      { opacity: 0 },
+      { opacity: 1, duration: 1, delay: 1.9, y: -10, ease: "back" }
+    );
+    gsap.fromTo(
+      "#contactNo",
+      { opacity: 0 },
+      { opacity: 1, duration: 1, delay: 2.1, y: -10, ease: "back" }
+    );
+    gsap.fromTo(
+      "#uomMail",
+      { opacity: 0 },
+      { opacity: 1, duration: 1, delay: 2.3, y: -10, ease: "back" }
+    );
+    gsap.fromTo(
+      "#gmail",
+      { opacity: 0 },
+      { opacity: 1, duration: 1, delay: 2.5, y: -10, ease: "back" }
+    );
+
+    gsap.fromTo(
+      "#batch",
+      { opacity: 0 },
+      { opacity: 1, duration: 1, delay: 2.7, y: -10, ease: "back" }
+    );
+    gsap.fromTo(
+      "#Faculty",
+      { opacity: 0 },
+      { opacity: 1, duration: 1, delay: 2.9, y: -10, ease: "back" }
+    );
+    gsap.fromTo(
+      "#Department",
+      { opacity: 0 },
+      { opacity: 1, duration: 1, delay: 3.1, y: -10, ease: "back" }
+    );
+    gsap.fromTo(
+      "#checkbox",
+      { opacity: 0 },
+      { opacity: 1, duration: 1, delay: 3.3, y: -10, ease: "back" }
+    );
+    gsap.fromTo(
+      "#buttton",
+      { opacity: 0 },
+      { opacity: 1, duration: 1, delay: 3.5, y: -10, ease: "back" }
+    );
+    gsap.fromTo(
+      "#experience",
+      { opacity: 0 },
+      { opacity: 1, duration: 1, delay: 3.5, y: -10, ease: "back" }
+    );
+  }, []);
+
   const {
     handleTelephone,
     handleGmail,
@@ -49,6 +126,8 @@ const RegisterForm = () => {
     setEnterPinButton,
     sendOTP,
     setOtp,
+    previousExperience,
+    handlePreviousExperions,
   }: any = useRegister();
 
   async function submitForm(e: any) {
@@ -91,25 +170,92 @@ const RegisterForm = () => {
         return;
       }
     }
+
     try {
       let checkUser = false;
 
-      const querySnapshot = await getDocs(collection(db, "user"));
-      querySnapshot.forEach((doc) => {
-        const user = Object.values(doc.data()).includes(uomMail);
-        if (user === true) {
-          warningMessage("This email address already registered to the system");
-          checkUser = true;
-        }
+      onValue(starCountRef, (snapshot) => {
+        const id = snapshot.val();
       });
+
+      // const querySnapshot = await getDocs(collection(db, "user"));
+      // querySnapshot.forEach((doc) => {
+      //   const user = Object.values(doc.data()).includes(uomMail);
+      //   if (user === true) {
+      //     warningMessage("This email address already registered to the system");
+      //     checkUser = true;
+      //   }
+      // });
+
       if (checkUser) return;
       if (!checked) {
         warningMessage("Confirm your details");
         return;
       }
-      sendOTP();
+
+      createUserWithEmailAndPassword(auth, gmail, index)
+        .then((userCredential) => {
+          sendEmailVerification(auth.currentUser!).then((d) => console.log(d));
+          router.push("/register");
+        })
+        .catch((error) => {
+          if (error.code === "auth/email-already-in-use") {
+            warningMessage(
+              "Your email address already registered to the system"
+            );
+          }
+        });
+
+      // const actionCodeSettings = {
+      //   // URL you want to redirect back to. The domain (www.example.com) for this
+      //   // URL must be in the authorized domains list in the Firebase Console.
+      //   url: "https://www.example.com/finishSignUp?cartId=1234",
+      //   // This must be true.
+      //   handleCodeInApp: true,
+      //   iOS: {
+      //     bundleId: "com.example.ios",
+      //   },
+      //   android: {
+      //     packageName: "com.example.android",
+      //     installApp: true,
+      //     minimumVersion: "12",
+      //   },
+      //   dynamicLinkDomain: "example.page.link",
+      // };
+
+      console.log(gmail);
+
+      // sendSignInLinkToEmail(auth, gmail, actionCodeSettings)
+      //   .then(() => {
+      //     // The link was successfully sent. Inform the user.
+      //     // Save the email locally so you don't need to ask the user for it again
+      //     // if they open the link on the same device.
+      //     window.localStorage.setItem("emailForSignIn", gmail);
+      //     // ...
+      //   })
+      //   .catch((error) => {
+      //     const errorCode = error.code;
+      //     const errorMessage = error.message;
+      //     // ...
+      //   });
+      // console.log(e);
     } catch (e) {
       console.log(e);
+    }
+  }
+
+  function handleNext() {
+    const user = auth.currentUser;
+    if (user) {
+      if (user.emailVerified) {
+        // User's email is verified
+        console.log("Email is verified");
+      } else {
+        // User's email is not verified
+        console.log("Email is not verified");
+      }
+    } else {
+      console.log("no user");
     }
   }
 
@@ -119,8 +265,16 @@ const RegisterForm = () => {
       warningMessage("Your pin number is wrong");
       return;
     }
-    const querySnapshot = await getDocs(collection(db, "user"));
-    const id = querySnapshot.docs.length + 1;
+    let id = 0;
+    // const starCountRef = ref(db, "user/");
+    onValue(starCountRef, (snapshot) => {
+      console.log([snapshot.val()]);
+      id = Object.keys(snapshot.val()).length;
+    });
+
+    // const querySnapshot = await getDocs(collection(db, "user"));
+    // const id = querySnapshot.docs.length + 1;
+    const registerId = `SB-${id + 1}`;
 
     const storeData = {
       name,
@@ -131,10 +285,12 @@ const RegisterForm = () => {
       batch,
       faculty,
       department,
-      id: `I-${id}`,
+      previousExperience,
+      registerId,
     };
 
-    await setDoc(doc(db, "user", index), storeData);
+    set(ref(db, "user/" + index), storeData);
+
     successMessage("Data send successfully");
     localStorage.clear();
     clearForm();
@@ -144,7 +300,46 @@ const RegisterForm = () => {
     setOtp("");
     return true;
   }
+  const style = {
+    "& label": {
+      color: "#04A2CA",
+    },
+    "& label.Mui-focused": {
+      color: "white",
+    },
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": {
+        borderColor: "#04A2CA",
+      },
+      "&:hover fieldset": {
+        borderColor: "pink",
+      },
+      "&.Mui-focused fieldset": {
+        borderColor: "white",
+      },
+    },
+  };
 
+  const styleSelect = {
+    width: "100%",
+    "& label": {
+      color: "#04A2CA",
+    },
+    "& label.Mui-focused": {
+      color: "white",
+    },
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": {
+        borderColor: "#04A2CA",
+      },
+      "&:hover fieldset": {
+        borderColor: "pink",
+      },
+      "&.Mui-focused fieldset": {
+        borderColor: "white",
+      },
+    },
+  };
   return (
     <div>
       {showModal && <Modals fn={saveData} />}
@@ -157,10 +352,11 @@ const RegisterForm = () => {
           spacing={2}
           mb={3}
         >
-          <Grid item sx={{ width: "75%" }}>
+          <Grid id="name" item sx={{ width: "100%" }}>
             <TextField
+              sx={style}
               fullWidth
-              id="outlined-basic"
+              id="nameText"
               size="small"
               label="Name"
               variant="outlined"
@@ -172,11 +368,12 @@ const RegisterForm = () => {
               }}
             />
           </Grid>
-          <Grid item sx={{ width: "75%" }}>
+          <Grid id="index" item sx={{ width: "100%" }}>
             <TextField
+              sx={style}
               fullWidth
               InputProps={{ sx: { borderRadius: 10 } }}
-              id="outlined-basic"
+              id="indexText"
               size="small"
               label="Index"
               required
@@ -185,11 +382,12 @@ const RegisterForm = () => {
               onChange={(e) => handleIndex(e)}
             />
           </Grid>
-          <Grid item>
+          <Grid id="contactNo" item sx={{ width: "100%" }}>
             <TextField
+              sx={style}
               fullWidth
               InputProps={{ sx: { borderRadius: 10 } }}
-              id="outlined-basic"
+              id="contactNoText"
               size="small"
               required
               label="Contact Number(Whatsapp)"
@@ -201,11 +399,12 @@ const RegisterForm = () => {
             />
           </Grid>
 
-          <Grid item sx={{ width: "75%" }}>
+          <Grid id="uomMail" item sx={{ width: "100%" }}>
             <TextField
+              sx={style}
               fullWidth
               InputProps={{ sx: { borderRadius: 10 } }}
-              id="outlined-basic"
+              id="uomMailText"
               size="small"
               required
               label="University Email(sample@uom.lk)"
@@ -216,11 +415,12 @@ const RegisterForm = () => {
               }
             />
           </Grid>
-          <Grid item sx={{ width: "75%" }}>
+          <Grid id="gmail" item sx={{ width: "100%" }}>
             <TextField
+              sx={style}
               fullWidth
               InputProps={{ sx: { borderRadius: 10 } }}
-              id="outlined-basic"
+              id="gmailText"
               size="small"
               label="Gmail"
               required
@@ -232,13 +432,19 @@ const RegisterForm = () => {
             />
           </Grid>
 
-          <Grid item sx={{ width: "75%" }}>
-            <FormControl sx={{ width: 220 }} size="small">
+          <Grid
+            id="batch"
+            item
+            sx={{
+              width: "100%",
+            }}
+          >
+            <FormControl sx={styleSelect} size="small">
               <InputLabel id="demo-simple-select-label">Batch</InputLabel>
               <Select
                 inputProps={{ sx: { borderRadius: 10 } }}
                 labelId="demo-simple-select-label"
-                id="demo-simple-select"
+                id="batchText"
                 label="Batch"
                 value={batch}
                 sx={{ borderRadius: 10 }}
@@ -252,13 +458,13 @@ const RegisterForm = () => {
             </FormControl>
           </Grid>
 
-          <Grid item sx={{ width: "75%" }}>
-            <FormControl sx={{ width: 220 }} size="small">
-              <InputLabel id="demo-simple-select-label">Faculty</InputLabel>
+          <Grid id="Faculty" item sx={{ width: "100%" }}>
+            <FormControl sx={styleSelect} size="small">
+              <InputLabel id="faculty">Faculty</InputLabel>
               <Select
                 sx={{ borderRadius: 10 }}
                 labelId="demo-simple-select-label"
-                id="demo-simple-select"
+                id="FacultyText"
                 label="Faculty"
                 onChange={(e: any) => handleFaculty(e)}
                 value={faculty}
@@ -283,13 +489,13 @@ const RegisterForm = () => {
             </FormControl>
           </Grid>
 
-          <Grid item sx={{ width: "75%" }}>
-            <FormControl sx={{ minWidth: 220 }} size="small">
-              <InputLabel id="demo-simple-select-label">Department</InputLabel>
+          <Grid id="Department" item sx={{ width: "100%" }}>
+            <FormControl sx={styleSelect} size="small">
+              <InputLabel id="department">Department</InputLabel>
               <Select
                 sx={{ borderRadius: 10 }}
                 labelId="demo-simple-select-label"
-                id="demo-simple-select"
+                id="DepartmentText"
                 label="Department"
                 onChange={(e: any) => handleDepartment(e)}
                 value={department}
@@ -337,35 +543,55 @@ const RegisterForm = () => {
               </Select>
             </FormControl>
           </Grid>
-
-          <Grid item sx={{ width: "100%" }}>
-            <FormControlLabel
-              control={<Checkbox />}
-              label="I confirm that I have entered the details correctly"
-              checked={checked}
-              onChange={handleChange}
+          <Grid id="experience" item sx={{ width: "100%" }}>
+            <TextField
+              sx={style}
+              fullWidth
+              InputProps={{ sx: { borderRadius: 10 } }}
+              id="experienceText"
+              size="small"
+              label="Previous volunteering experience if you have any (optional)"
+              required
+              variant="outlined"
+              value={previousExperience}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                handlePreviousExperions(e)
+              }
             />
           </Grid>
 
-          <Grid item sx={{ width: "75%" }}>
-            <Button
-              type="submit"
-              sx={{ width: 200, borderRadius: 10 }}
-              size="small"
-              variant="contained"
-            >
-              Save details
-            </Button>
-            {enterPinButton && (
+          <Grid item sx={{ width: "100%" }}>
+            <div id="checkbox">
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    sx={{
+                      color: "#04A2CA",
+                      "&.Mui-checked": {
+                        color: "#04A2CA",
+                      },
+                    }}
+                  />
+                }
+                label="I confirm that I have entered the details correctly"
+                checked={checked}
+                onChange={handleChange}
+                sx={{ color: "#04A2CA" }}
+              />
+            </div>
+          </Grid>
+
+          <Grid item sx={{ width: "100%" }}>
+            <div id="buttton">
               <Button
-                onClick={() => setShowModal(true)}
-                sx={{ width: 200, borderRadius: 10, mt: 2 }}
+                type="submit"
+                sx={{ width: 200, borderRadius: 10 }}
                 size="small"
                 variant="contained"
               >
-                Enter PIN
+                Save details
               </Button>
-            )}
+            </div>
           </Grid>
 
           <div></div>
