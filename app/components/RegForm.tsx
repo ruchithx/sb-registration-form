@@ -49,7 +49,7 @@ const RegForm = () => {
           <Typography variant="h4" mt={4} component="h2">
             <div className="topic" style={{ textAlign: "center" }}>
               <p>Application for Membership of IEEE Student Branch</p>
-              <p>University of Moratuwa</p> Term '23/24
+              <p>University of Moratuwa</p> Term 23/24
             </div>
           </Typography>
         </Grid>
@@ -66,7 +66,7 @@ const RegForm = () => {
               </>
               <>
                 IEEE (Institute of Electrical and Electronics Engineers) is the
-                world’s largest technical professional organization dedicated to
+                worlds largest technical professional organization dedicated to
                 inspiring a global community to innovate for a better tomorrow.
                 IEEE Student Branch University of Moratuwa will help you to
                 reach the global and local communities, connect with

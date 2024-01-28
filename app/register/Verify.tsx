@@ -15,12 +15,7 @@ import { useRegister } from "../components/RegisterContext";
 export default function Verify() {
   const router = useRouter();
   const [sample, setSample] = useState(false);
-  useEffect(
-    function () {
-      console.log(auth.currentUser?.emailVerified);
-    },
-    [auth.currentUser?.emailVerified]
-  );
+
   function checkVerify() {
     const user = auth.currentUser;
 
