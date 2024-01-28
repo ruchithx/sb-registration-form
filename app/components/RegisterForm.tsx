@@ -514,20 +514,11 @@ const RegisterForm = () => {
           <Grid item sx={{ width: "100%" }}>
             <div id="checkbox">
               <FormControlLabel
-                control={
-                  <Checkbox
-                    sx={{
-                      color: "#04A2CA",
-                      "&.Mui-checked": {
-                        color: "#04A2CA",
-                      },
-                    }}
-                  />
-                }
+                control={<Checkbox />}
                 label="I confirm that I have entered the details correctly"
                 checked={checked}
                 onChange={handleChange}
-                sx={{ color: "#04A2CA" }}
+                sx={{ color: "white" }}
               />
             </div>
           </Grid>
@@ -538,7 +529,7 @@ const RegisterForm = () => {
                 type="submit"
                 sx={{ width: 200, borderRadius: 10 }}
                 size="small"
-                variant="contained"
+                variant="outlined"
               >
                 Save details
               </Button>

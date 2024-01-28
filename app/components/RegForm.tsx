@@ -53,7 +53,7 @@ const RegForm = () => {
         >
           <Grid item>
             <Typography variant="h4" mt={4} component="h2">
-              <div className="topic" style={{ textAlign: "center" }}>
+              <div className={style.formFont} style={{ textAlign: "center" }}>
                 <p>Application for Membership of IEEE Student Branch</p>
                 <p>University of Moratuwa</p>
                 <p>Term '23/24</p>
@@ -62,7 +62,11 @@ const RegForm = () => {
           </Grid>
 
           <Grid item sx={{ fontSize: 18 }}>
-            <div id="description" style={{ textAlign: "center" }}>
+            <div
+              className={style.formFont2}
+              id="description"
+              style={{ textAlign: "center" }}
+            >
               <Typography
                 sx={{
                   typography: {
