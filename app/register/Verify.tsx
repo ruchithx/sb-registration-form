@@ -8,9 +8,11 @@ import { MuiOtpInput } from "mui-one-time-password-input";
 // import { warningMessage } from "../components/helper";
 // import { saveData } from "../components/RegisterForm";
 import { useRouter } from "next/navigation";
+
 import { successMessage, warningMessage } from "../components/helper";
 import { onValue, ref, set } from "@firebase/database";
 import { useRegister } from "../components/RegisterContext";
+import next from "next/types";
 
 export default function Verify() {
   const router = useRouter();
@@ -18,7 +20,7 @@ export default function Verify() {
 
   function checkVerify() {
     const user = auth.currentUser;
-
+    console.log(user);
     if (user) {
       if (user.emailVerified) {
         // User's email is verified
@@ -27,8 +29,7 @@ export default function Verify() {
         auth.signOut();
         router.push("/");
       } else {
-        // User's email is not verified
-        console.log("Email is not verified");
+        router.push("/register/check");
         warningMessage("Email is not verified");
       }
     } else {
@@ -115,7 +116,7 @@ export default function Verify() {
               onClick={checkVerify}
               sx={{ width: 100, borderRadius: 10 }}
               size="small"
-              variant="contained"
+              variant="outlined"
             >
               save
             </Button>

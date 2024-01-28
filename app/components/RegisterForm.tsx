@@ -205,57 +205,8 @@ const RegisterForm = () => {
             );
           }
         });
-
-      // const actionCodeSettings = {
-      //   // URL you want to redirect back to. The domain (www.example.com) for this
-      //   // URL must be in the authorized domains list in the Firebase Console.
-      //   url: "https://www.example.com/finishSignUp?cartId=1234",
-      //   // This must be true.
-      //   handleCodeInApp: true,
-      //   iOS: {
-      //     bundleId: "com.example.ios",
-      //   },
-      //   android: {
-      //     packageName: "com.example.android",
-      //     installApp: true,
-      //     minimumVersion: "12",
-      //   },
-      //   dynamicLinkDomain: "example.page.link",
-      // };
-
-      console.log(gmail);
-
-      // sendSignInLinkToEmail(auth, gmail, actionCodeSettings)
-      //   .then(() => {
-      //     // The link was successfully sent. Inform the user.
-      //     // Save the email locally so you don't need to ask the user for it again
-      //     // if they open the link on the same device.
-      //     window.localStorage.setItem("emailForSignIn", gmail);
-      //     // ...
-      //   })
-      //   .catch((error) => {
-      //     const errorCode = error.code;
-      //     const errorMessage = error.message;
-      //     // ...
-      //   });
-      // console.log(e);
     } catch (e) {
       console.log(e);
-    }
-  }
-
-  function handleNext() {
-    const user = auth.currentUser;
-    if (user) {
-      if (user.emailVerified) {
-        // User's email is verified
-        console.log("Email is verified");
-      } else {
-        // User's email is not verified
-        console.log("Email is not verified");
-      }
-    } else {
-      console.log("no user");
     }
   }
 
