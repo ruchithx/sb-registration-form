@@ -11,6 +11,7 @@ export default function Register() {
         width: "100%",
         height: "100vh",
         backgroundColor: "white",
+        color: "black",
       }}
     >
       <Verify />

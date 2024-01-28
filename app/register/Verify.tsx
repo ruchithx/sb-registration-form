@@ -94,7 +94,6 @@ export default function Verify() {
       <Grid item sx={{ width: "75%" }}>
         <Box sx={style}>
           <Typography
-            className={styles.formFont}
             id="modal-modal-title"
             variant="h6"
             component="h2"
@@ -123,7 +122,7 @@ export default function Verify() {
               onClick={checkVerify}
               sx={{ width: 100, borderRadius: 10 }}
               size="small"
-              variant="outlined"
+              variant="contained"
             >
               save
             </Button>
