@@ -13,10 +13,9 @@ import { successMessage, warningMessage } from "../components/helper";
 import { onValue, ref, set } from "@firebase/database";
 import { useRegister } from "../components/RegisterContext";
 import next from "next/types";
-
+import styles from "../form.module.css";
 export default function Verify() {
   const router = useRouter();
-  const [sample, setSample] = useState(false);
 
   function checkVerify() {
     const user = auth.currentUser;
@@ -43,8 +42,8 @@ export default function Verify() {
     left: "50%",
     transform: "translate(-50%, -50%)",
     width: 400,
-    bgcolor: "#04A2CA",
-    border: "2px solid #000",
+    bgcolor: "white",
+    color: "linear-gradient(to right, #07060d, #0e559d, #0e559d)",
     boxShadow: 24,
     p: 4,
     borderRadius: "10px",
@@ -91,14 +90,22 @@ export default function Verify() {
   };
 
   return (
-    <div>
+    <div style={{ backgroundColor: "white" }}>
       <Grid item sx={{ width: "75%" }}>
-        <div id="buttton"></div>
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+          <Typography
+            className={styles.formFont}
+            id="modal-modal-title"
+            variant="h6"
+            component="h2"
+            sx={{ fontFamily: "Amenti Regular" }}
+          >
             Email verification
           </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2, mb: 3 }}>
+          <Typography
+            id="modal-modal-description"
+            sx={{ mt: 2, mb: 3, fontFamily: "Amenti Regular" }}
+          >
             receive a verification email with a unique link. Clicking the link
             confirms your uom mail address
           </Typography>
