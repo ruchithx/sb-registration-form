@@ -253,14 +253,15 @@ const RegisterForm = () => {
   }
   const style = {
     "& label": {
-      color: "#04A2CA",
+      color: "white",
+      fontFamily: "Amenti Medium",
     },
     "& label.Mui-focused": {
       color: "white",
     },
     "& .MuiOutlinedInput-root": {
       "& fieldset": {
-        borderColor: "#04A2CA",
+        borderColor: "white",
       },
       "&:hover fieldset": {
         borderColor: "pink",
@@ -274,14 +275,15 @@ const RegisterForm = () => {
   const styleSelect = {
     width: "100%",
     "& label": {
-      color: "#04A2CA",
+      color: "white",
+      fontFamily: "Amenti Medium",
     },
     "& label.Mui-focused": {
       color: "white",
     },
     "& .MuiOutlinedInput-root": {
       "& fieldset": {
-        borderColor: "#04A2CA",
+        borderColor: "white",
       },
       "&:hover fieldset": {
         borderColor: "pink",
@@ -315,7 +317,7 @@ const RegisterForm = () => {
               onChange={(e) => handleName(e)}
               required
               InputProps={{
-                sx: { borderRadius: 10 },
+                sx: { borderRadius: 4, fontFamily: "Amenti Medium" },
               }}
             />
           </Grid>
@@ -323,7 +325,9 @@ const RegisterForm = () => {
             <TextField
               sx={style}
               fullWidth
-              InputProps={{ sx: { borderRadius: 10 } }}
+              InputProps={{
+                sx: { borderRadius: 4, fontFamily: "Amenti Medium" },
+              }}
               id="indexText"
               size="small"
               label="Index"
@@ -337,11 +341,13 @@ const RegisterForm = () => {
             <TextField
               sx={style}
               fullWidth
-              InputProps={{ sx: { borderRadius: 10 } }}
+              InputProps={{
+                sx: { borderRadius: 4, fontFamily: "Amenti Medium" },
+              }}
               id="contactNoText"
               size="small"
               required
-              label="Contact Number(Whatsapp)"
+              label="Contact Number (Whatsapp)"
               variant="outlined"
               value={mobileNumber}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -354,11 +360,13 @@ const RegisterForm = () => {
             <TextField
               sx={style}
               fullWidth
-              InputProps={{ sx: { borderRadius: 10 } }}
+              InputProps={{
+                sx: { borderRadius: 4, fontFamily: "Amenti Medium" },
+              }}
               id="uomMailText"
               size="small"
               required
-              label="University Email(sample@uom.lk)"
+              label="University Email (sample@uom.lk)"
               variant="outlined"
               value={uomMail}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -370,7 +378,9 @@ const RegisterForm = () => {
             <TextField
               sx={style}
               fullWidth
-              InputProps={{ sx: { borderRadius: 10 } }}
+              InputProps={{
+                sx: { borderRadius: 4, fontFamily: "Amenti Medium" },
+              }}
               id="gmailText"
               size="small"
               label="Gmail"
@@ -393,18 +403,21 @@ const RegisterForm = () => {
             <FormControl sx={styleSelect} size="small">
               <InputLabel id="demo-simple-select-label">Batch</InputLabel>
               <Select
-                inputProps={{ sx: { borderRadius: 10 } }}
+                inputProps={{
+                  sx: { borderRadius: 4, fontFamily: "Amenti Medium" },
+                }}
                 labelId="demo-simple-select-label"
                 id="batchText"
                 label="Batch"
                 value={batch}
-                sx={{ borderRadius: 10 }}
+                sx={{ borderRadius: 4 }}
                 onChange={(e: any) => handleBatch(e)}
               >
                 <MenuItem value="Batch 19">Batch 19</MenuItem>
                 <MenuItem value="Batch 20">Batch 20</MenuItem>
                 <MenuItem value="Batch 21">Batch 21</MenuItem>
                 <MenuItem value="Batch 22">Batch 22</MenuItem>
+                <MenuItem value="Batch 23">Batch 23</MenuItem>
               </Select>
             </FormControl>
           </Grid>
@@ -413,29 +426,30 @@ const RegisterForm = () => {
             <FormControl sx={styleSelect} size="small">
               <InputLabel id="faculty">Faculty</InputLabel>
               <Select
-                sx={{ borderRadius: 10 }}
+                sx={{ borderRadius: 4, fontFamily: "Amenti Medium" }}
                 labelId="demo-simple-select-label"
                 id="FacultyText"
                 label="Faculty"
                 onChange={(e: any) => handleFaculty(e)}
                 value={faculty}
-                inputProps={{ sx: { borderRadius: 10 } }}
+                inputProps={{ sx: { borderRadius: 4 } }}
               >
-                <MenuItem value="Faculty Of Architecture">
-                  Faculty Of Architecture
-                </MenuItem>
                 <MenuItem value=" Faculty Of Engineering">
                   Faculty Of Engineering
+                </MenuItem>
+                <MenuItem value="Faculty Of Information technology">
+                  Faculty Of Information Technology
+                </MenuItem>
+                <MenuItem value="Faculty Of Architecture">
+                  Faculty Of Architecture
                 </MenuItem>
                 <MenuItem value=" Faculty Of Business">
                   Faculty Of Business
                 </MenuItem>
-                <MenuItem value="Faculty Of Information technology">
-                  Faculty Of Information technology
-                </MenuItem>
                 <MenuItem value="Faculty Of Medicine">
                   Faculty Of Medicine
                 </MenuItem>
+                <MenuItem value="ITUM">ITUM</MenuItem>
               </Select>
             </FormControl>
           </Grid>
@@ -444,7 +458,7 @@ const RegisterForm = () => {
             <FormControl sx={styleSelect} size="small">
               <InputLabel id="department">Department</InputLabel>
               <Select
-                sx={{ borderRadius: 10 }}
+                sx={{ borderRadius: 4, fontFamily: "Amenti Medium" }}
                 labelId="demo-simple-select-label"
                 id="DepartmentText"
                 label="Department"
@@ -491,18 +505,22 @@ const RegisterForm = () => {
                 <MenuItem value="Computational Mathematics">
                   Computational Mathematics
                 </MenuItem>
+                <MenuItem value="Other">Other</MenuItem>
               </Select>
             </FormControl>
           </Grid>
           <Grid id="experience" item sx={{ width: "100%" }}>
             <TextField
+              rows={3}
+              multiline
               sx={style}
               fullWidth
-              InputProps={{ sx: { borderRadius: 10 } }}
+              InputProps={{
+                sx: { borderRadius: 5, fontFamily: "Amenti Medium" },
+              }}
               id="experienceText"
               size="small"
-              label="Previous volunteering experience if you have any (optional)"
-              required
+              label="Previous volunteering experience "
               variant="outlined"
               value={previousExperience}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -512,31 +530,52 @@ const RegisterForm = () => {
           </Grid>
 
           <Grid item sx={{ width: "100%" }}>
-            <div id="checkbox">
+            <div
+              id="checkbox"
+              style={{
+                fontFamily: "Amenti Medium",
+                display: "flex",
+                alignItems: "center",
+                gap: 0,
+              }}
+            >
               <FormControlLabel
                 control={<Checkbox />}
-                label="I confirm that I have entered the details correctly"
+                label=""
                 checked={checked}
                 onChange={handleChange}
-                sx={{ color: "white" }}
+                sx={{
+                  color: "white",
+                  fontFamily: "Amenti Medium",
+                  marginRight: 0,
+                }}
               />
-            </div>
-          </Grid>
-
-          <Grid item sx={{ width: "100%" }}>
-            <div id="buttton">
-              <Button
-                type="submit"
-                sx={{ width: 200, borderRadius: 10 }}
-                size="small"
-                variant="outlined"
-              >
-                Save details
-              </Button>
+              I confirm that I have entered the details correctly
             </div>
           </Grid>
 
           <div></div>
+        </Grid>
+        <Grid
+          item
+          sx={{ width: "100%", display: "flex", justifyContent: "center" }}
+        >
+          <div id="buttton">
+            <Button
+              type="submit"
+              sx={{
+                width: 200,
+                borderRadius: 10,
+                color: "white",
+                borderColor: "white",
+                fontFamily: "Amenti Medium",
+              }}
+              size="small"
+              variant="outlined"
+            >
+              Save details
+            </Button>
+          </div>
         </Grid>
       </form>
       <ToastContainer />

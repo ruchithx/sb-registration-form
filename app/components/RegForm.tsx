@@ -71,7 +71,8 @@ const RegForm = () => {
                 sx={{
                   typography: {
                     md: { fontSize: 13 },
-                    lg: { fontSize: 15, padding: 5 },
+                    lg: { fontSize: 14, padding: 5 },
+                    fontFamily: "Amenti Regular",
                   },
                 }}
               >
