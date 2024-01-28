@@ -1,0 +1,9 @@
+.background {
+  background: linear-gradient(to right, #07060d, #0e559d, #0e559d);
+}
+.main {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  /* margin-left: 30px;
+  margin-right: 20px; */
+}
