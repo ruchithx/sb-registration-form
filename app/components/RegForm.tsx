@@ -61,7 +61,7 @@ const RegForm = () => {
             </Typography>
           </Grid>
 
-          <Grid item sx={{ fontSize: 18 }}>
+          <Grid item>
             <div
               className={style.formFont2}
               id="description"
@@ -70,7 +70,7 @@ const RegForm = () => {
               <Typography
                 sx={{
                   typography: {
-                    md: { fontSize: 13 },
+                    md: { fontSize: 11 },
                     lg: { fontSize: 14, padding: 5 },
                     fontFamily: "Amenti Regular",
                   },

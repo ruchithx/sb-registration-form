@@ -102,6 +102,7 @@ export default function Verify() {
             Email verification
           </Typography>
           <Typography
+            className=""
             id="modal-modal-description"
             sx={{ mt: 2, mb: 3, fontFamily: "Amenti Regular" }}
           >
