@@ -6,6 +6,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { darkTheme } from "./providers/darkModeProvider";
 
 import RegForm from "./components/RegForm";
+import { Typography } from "@mui/material";
 
 export default function Home() {
   return (

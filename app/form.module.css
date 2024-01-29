@@ -14,5 +14,11 @@
   font-family: "Amenti Medium";
 }
 .textcolor {
-  color: linear-gradient(to right, #07060d, #0e559d, #0e559d);
+  background: rgb(7, 6, 13);
+  background: linear-gradient(
+    106deg,
+    rgba(7, 6, 13, 1) 0%,
+    rgba(14, 85, 157, 1) 50%,
+    rgba(7, 6, 13, 1) 100%
+  );
 }

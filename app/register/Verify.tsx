@@ -19,17 +19,14 @@ export default function Verify() {
 
   function checkVerify() {
     const user = auth.currentUser;
-    console.log(user);
+
     if (user) {
       if (user.emailVerified) {
-        // User's email is verified
-        console.log("Email is verified");
         saveData();
         auth.signOut();
         router.push("/");
       } else {
-        router.push("/register/check");
-        warningMessage("Email is not verified");
+        // warningMessage("Email is not verified");
       }
     } else {
       console.log("no user");
@@ -43,7 +40,6 @@ export default function Verify() {
     transform: "translate(-50%, -50%)",
     width: 400,
     bgcolor: "white",
-    color: "linear-gradient(to right, #07060d, #0e559d, #0e559d)",
     boxShadow: 24,
     p: 4,
     borderRadius: "10px",
@@ -85,12 +81,11 @@ export default function Verify() {
 
     set(ref(db, "user/" + index), storeData);
 
-    // successMessage("Data send successfully");
     localStorage.clear();
   };
 
   return (
-    <div style={{ backgroundColor: "white" }}>
+    <div className={styles.textcolor} style={{ backgroundColor: "white" }}>
       <Grid item sx={{ width: "75%" }}>
         <Box sx={style}>
           <Typography

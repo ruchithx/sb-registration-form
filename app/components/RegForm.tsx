@@ -34,7 +34,7 @@ const RegForm = () => {
       sx={{
         typography: {
           lg: { marginLeft: 60, marginRight: 50 },
-          md: { marginLeft: 0, marginRight: 0 },
+          sm: { marginLeft: 20, marginRight: 15 },
         },
       }}
     >
@@ -70,7 +70,8 @@ const RegForm = () => {
               <Typography
                 sx={{
                   typography: {
-                    md: { fontSize: 13 },
+                    sm: { fontSize: 8 },
+                    md: { fontSize: 9 },
                     lg: { fontSize: 14, padding: 5 },
                     fontFamily: "Amenti Regular",
                   },
