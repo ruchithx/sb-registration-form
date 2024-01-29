@@ -200,9 +200,10 @@ const RegisterForm = () => {
         })
         .catch((error) => {
           if (error.code === "auth/email-already-in-use") {
-            warningMessage(
-              "Your email address already registered to the system"
-            );
+            // warningMessage(
+            //   "Your email address already registered to the system"
+            // );
+            router.push("/register");
           }
         });
     } catch (e) {

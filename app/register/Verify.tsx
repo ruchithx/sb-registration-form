@@ -26,7 +26,7 @@ export default function Verify() {
         auth.signOut();
         router.push("/");
       } else {
-        // warningMessage("Email is not verified");
+        warningMessage("Email is not verified");
       }
     } else {
       console.log("no user");
